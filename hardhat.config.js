@@ -5,7 +5,6 @@ const dotenv = require("dotenv");
 dotenv.config({path: `./.env.${process.env.NODE_ENV || "development"}`});
 
 module.exports = {
-  solidity: "0.8.28",
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
@@ -19,6 +18,15 @@ module.exports = {
       url: "https://api.avax.network/ext/bc/C/rpc",
       chainId: 43114,
       accounts: [process.env.PRIVATE_KEY]
+    }
+  },
+  solidity: {
+    version: "0.8.28",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
     }
   },
   paths: {
