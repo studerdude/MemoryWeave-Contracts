@@ -1,13 +1,16 @@
 /** @type import('hardhat/config').HardhatUserConfig */
 
+require("@nomicfoundation/hardhat-ethers");
+
 //IMPORTANT: when calling npx hardhat set NODE_ENV to the desired ENV or it will default to development
 const dotenv = require("dotenv");
 dotenv.config({path: `./.env.${process.env.NODE_ENV || "development"}`});
 
 module.exports = {
-  defaultNetwork: "hardhat",
+  defaultNetwork: process.env.DEFAULT_NETWORK,
   networks: {
     hardhat: {
+
     },
     fuji: {
       url: "https://api.avax-test.network/ext/bc/C/rpc",
