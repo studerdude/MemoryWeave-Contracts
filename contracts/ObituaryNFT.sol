@@ -12,14 +12,14 @@ contract MemoryWeaveObituary is
     address public graveyardWallet;
 
     struct Obituary {
-        string _name;
-        string _funeralHomeCode;
+        string name;
+        string funeralHomeCode;
         uint256 timestamp;
     }
 
     mapping(uint256 => Obituary) public obituaries;
 
-    event ObituaryMinted(uint256 indexed tokenID, string name, address to);
+    event ObituaryMinted(uint256 indexed tokenID, string name, string funeralHomeCode, address to);
     event ObituaryURIUpdated(uint256 indexed tokenID, string newURI);
 
     constructor(address initialOwner, address graveyardWallet_) Ownable(initialOwner) ERC721("MemoryWeaveObituary", "MWOBT"){
@@ -28,17 +28,18 @@ contract MemoryWeaveObituary is
     }
 
     /// @notice Mint a new Obituary NFT to the graveyard Wallet
-    /// @param name Name of the deceased
+    /// @param name_ Name of the deceased
+    /// @param funeralHomeCode_ Funeral home identifier
     /// @return tokenId the newly minted NFT's token ID
-    function mintObituary(string memory name, string memory funeralHomeCode) external onlyOwner returns (uint256 tokenId){
+    function mintObituary(string memory name_, string memory funeralHomeCode_) external onlyOwner returns (uint256 tokenId){
         tokenId = nextTokenId++;
         _safeMint(graveyardWallet, tokenId);
         obituaries[tokenId] = Obituary({
-            _name: name,
-            _funeralHomeCode: funeralHomeCode,
+            name: name_,
+            funeralHomeCode: funeralHomeCode_,
             timestamp: block.timestamp
         });
-        emit ObituaryMinted(tokenId, name, graveyardWallet);
+        emit ObituaryMinted(tokenId, name_, funeralHomeCode_, graveyardWallet);
     }
 
     /// @notice Update the token URI for a given token ID
