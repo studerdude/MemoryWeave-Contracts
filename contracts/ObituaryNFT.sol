@@ -12,7 +12,8 @@ contract MemoryWeaveObituary is
     address public graveyardWallet;
 
     struct Obituary {
-        string name;
+        string _name;
+        string _funeralHomeCode;
         uint256 timestamp;
     }
 
@@ -29,10 +30,14 @@ contract MemoryWeaveObituary is
     /// @notice Mint a new Obituary NFT to the graveyard Wallet
     /// @param name Name of the deceased
     /// @return tokenId the newly minted NFT's token ID
-    function mintObituary(string memory name) external onlyOwner returns (uint256 tokenId){
+    function mintObituary(string memory name, string memory funeralHomeCode) external onlyOwner returns (uint256 tokenId){
         tokenId = nextTokenId++;
         _safeMint(graveyardWallet, tokenId);
-        obituaries[tokenId] = Obituary(name, block.timestamp);
+        obituaries[tokenId] = Obituary({
+            _name: name,
+            _funeralHomeCode: funeralHomeCode,
+            timestamp: block.timestamp
+        });
         emit ObituaryMinted(tokenId, name, graveyardWallet);
     }
 
