@@ -8,7 +8,7 @@ async function main() {
 
   const contract = await ethers.getContractAt("MemoryWeaveObituary", CONTRACT_ADDRESS);
 
-  const tx = await contract.mintObituary("Jane Doe 5", "funeralHomeCode");
+  const tx = await contract.mintObituary("Francesca Taylor", "FH-CNW23");
   const receipt = await tx.wait();
   
   console.log(receipt.logs);

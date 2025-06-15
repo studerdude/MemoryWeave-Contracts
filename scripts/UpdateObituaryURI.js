@@ -1,6 +1,6 @@
 const { ethers } = require("hardhat");
 
-const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS;
+const CONTRACT_ADDRESS = process.env.OBITUARY_CONTRACT_ADDRESS;
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -8,7 +8,7 @@ async function main() {
 
   const contract = await ethers.getContractAt("MemoryWeaveObituary", CONTRACT_ADDRESS);
 
-  const tx = await contract.updateObituaryURI(1, "https://arweave.net/O3bBhgvMmWPAV35sf9Hov9FEGwQNXqsHEjYyUIBpmXg");
+  const tx = await contract.updateObituaryURI(21, "https://arweave.net/QMYUDake1DdTzwA8Kkjqny40BogLuWepl_vRHslsPXc");
   const receipt = await tx.wait();
   
   console.log(receipt.logs);
